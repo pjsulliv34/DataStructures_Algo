@@ -1,5 +1,5 @@
-from stack import StackArray
-from operand import Operands
+from lab1.stack import StackArray
+from lab1.operand import Operands
 class Expressions():
     def __init__(self, string, type):
         self.string = string
@@ -34,20 +34,20 @@ class Expressions():
 
     def pre_to_post(self):
         stack = StackArray()
-        print(f'Start: {self.string}')
+       # print(f'Start: {self.string}')
         for char in self.reverse_order(self.string):
             if char not in Expressions.operators: 
                 stack.push(char)
             elif char in Expressions.operators:
                     pop1 = stack.pop()
                     pop2 = stack.pop()
-                    print(f'{pop1},{pop2}{char}')
+                    #print(f'{pop1},{pop2}{char}')
                     operand = Operands(pop1,pop2,char,'Pre_Post')
                     if operand.combine_operands() == 'None-Type':
                         return "Incorrect Number of Operands"
                     else:
                         stack.push(operand.combine_operands())    
-        stack.display_stack()
+        #stack.display_stack()
         if stack.stack_length()>1:
             return 'Incorrect Number of Operators' 
         else:

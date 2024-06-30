@@ -6,8 +6,7 @@
 # Generally used to process command line arguments and 'launch' the program
 from pathlib import Path
 import argparse
-
-from proj0 import process_files
+from lab1.lab1_functions import process_input_file
 
 # Argument parser is an amazing tool. It's worth mastering
 arg_parser = argparse.ArgumentParser()
@@ -20,5 +19,4 @@ args = arg_parser.parse_args()
 in_path = Path(args.in_file)
 out_path = Path(args.out_file)
 
-with in_path.open('r') as input_file, out_path.open('w') as output_file:
-    process_files(input_file, output_file)
+process_input_file(in_path,out_path)
