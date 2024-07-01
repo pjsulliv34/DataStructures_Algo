@@ -1,0 +1,16 @@
+AB+C*D- 
+AB+CD+* 
+ABC+*D/ 
+AB*CD/+ 
+ABC*+D/ 
+AB+CD*+ 
+ABCD+*+ 
+ABC*D/+ 
+ABCD*+/ 
+AB+CDE+*+ 
+A 
+A+B 
+AB+C 
+AB*C/ 
+AB+C+ 
+

@@ -1,0 +1,45 @@
+Testcase 1
+ Prefix: AB+C*
+ Postfix: *+ABC
+Testcase 2
+ Prefix: AB*CD/+
+ Postfix: +*AB/CD
+Testcase 3
+ Prefix: ABC*+D/
+ Postfix: /+A*BCD
+Testcase 4
+ Prefix: AB+CD*+
+ Postfix: ++AB*CD
+Testcase 5
+ Prefix: ABC*D/+
+ Postfix: +A/*BCD
+Testcase 6
+ Prefix: ABCD*+/
+ Postfix: /A+B*CD
+Testcase 7
+ Prefix: AB+CD+*
+ Postfix: *+AB+CD
+Testcase 8
+ Prefix: ABCD+*+
+ Postfix: +A*B+CD
+Testcase 9
+ Prefix: ABC+*D/
+ Postfix: /*A+BCD
+Testcase 10
+ Prefix: AB+CDE+*+
+ Postfix: ++AB*C+DE
+Testcase 11
+ Prefix: A
+ Postfix: A
+Testcase 12
+ Prefix: AB+
+ Postfix: +AB
+Testcase 13
+ Prefix: ABC+*
+ Postfix: *A+BC
+Testcase 14
+ Prefix: AB*+
+ Postfix: Incorrect Number of Operands
+Testcase 15
+ Prefix: AB*CD+
+ Postfix: Incorrect Number of Operators
