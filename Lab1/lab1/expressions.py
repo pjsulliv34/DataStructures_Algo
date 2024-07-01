@@ -49,11 +49,11 @@ class Expressions():
                         return "Incorrect Number of Operands"
                     else:
                         stack.push(operand.combine_operands())    
-        #stack.display_stack()
+        
         if stack.stack_length()>1:
             return 'Incorrect Number of Operators' 
         else:
-            return stack.return_object()[0]
+            return stack.pop()
         
 
 
@@ -73,7 +73,7 @@ class Expressions():
         if stack.stack_length()>1:
             return 'Incorrect Number of Operators' 
         else:
-            return self.reverse_order(stack.return_object()[0])
+            return self.reverse_order(stack.pop())
 
 
     def pre_to_infix(self):
@@ -93,7 +93,7 @@ class Expressions():
         if stack.stack_length()>1:
             return 'Incorrect Number of Operators' 
         else:
-            return stack.return_object()[0]
+            return stack.pop()
 
     def post_to_infix(self):
         stack = StackArray()
@@ -112,7 +112,7 @@ class Expressions():
         if stack.stack_length()>1:
             return 'Incorrect Number of Operators' 
         else:
-            return stack.return_object()[0]
+            return stack.pop()
 
     def reverse_order(self,string):
         stack = StackArray()
@@ -127,4 +127,6 @@ class Expressions():
             reverse_string = reverse_string+char  
         return reverse_string
         
+
+    
    
