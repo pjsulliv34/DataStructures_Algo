@@ -4,9 +4,7 @@ class Operands:
         self.op2 = op2
         self.char = char
         self.type = type
-        self.valid_types = ['Post_Pre', 'Pre_Post','Pre_Infix','Post_Infix']
-        if self.type not in self.valid_types:
-            print(f"The type you entered: {type}, is incorrect. Please enter a type from the following: {self.valid_types}")
+    
 
     def combine_operands(self):
         if self.type in ['Post_Pre', 'Pre_Post']:
@@ -26,7 +24,7 @@ class Operands:
 
     def combine_pre_infix(self):
         if self.check_for_None() == False:
-            operand = self.op1 + self.char + self.op2
+            operand = '('+ self.op1 + self.char + self.op2+')'
             return operand
         else:
             return "None-Type"
@@ -34,7 +32,7 @@ class Operands:
     
     def combine_post_infix(self):
         if self.check_for_None() == False:
-            operand = self.op2 + self.char + self.op1
+            operand = '('+self.op2 + self.char + self.op1+')'
             return operand
         else:
             return "None-Type"

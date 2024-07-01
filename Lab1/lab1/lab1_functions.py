@@ -1,7 +1,6 @@
-
 from lab1.expressions import Expressions
 
-def process_input_file(input,output):
+def process_input_file(input,output,input_type,output_type):
     Processed_data = []
     with open(input,'r') as reader:
         while True:
@@ -10,20 +9,24 @@ def process_input_file(input,output):
             line = line.replace('^','$')
             if line == '':
                 break
-            #print(f"Working on {line}")
-            
+        
             try:
                 # print(f'Initial len {len(line)}')
-                Prefix_object = Expressions(line,'Prefix')
-                post_fix = Prefix_object.to_post_fix()
-                #print(f'{post_fix}, postifx')
-                Processed_data.append([line,post_fix])
-
-                
+                print(line,input_type,output_type)
+                expression_object = Expressions(line,input_type)
+                print(f'output type: {output_type}')
+                if output_type == 'Postfix':
+                    output_expression = expression_object.to_post_fix()
+                    Processed_data.append([line,output_expression])
+                elif output_type == 'Prefix':
+                    output_expression = expression_object.to_pre_fix()
+                    Processed_data.append([line,output_expression])
+                else:
+                    output_expression = expression_object.to_infix()
+                    Processed_data.append([line,output_expression])
             except:
-                print(f"Line not working: {line}")
-                print(post_fix)
                 Processed_data.append([line,'Unknown Error'])
+                     
 
     #print(Processed_data)
     with open(output, 'w') as writer:
@@ -31,9 +34,3 @@ def process_input_file(input,output):
         for line in Processed_data:
             writer.write(f"Testcase {index}\n Prefix: {line[0]}\n Postfix: {line[1]}\n")
             index +=1
-
-
-# loc_ = r"C:\Users\pjsul\OneDrive\Desktop\Masters AI Courses\Data Structures\Labs\Lab1_submission\resources\Required Input.txt"
-# output = r"C:\Users\pjsul\OneDrive\Desktop\Masters AI Courses\Data Structures\Labs\Lab1_submission\resources\output.txt"
-
-# process_input_file(loc_,output)

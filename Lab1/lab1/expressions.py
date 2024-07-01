@@ -1,32 +1,34 @@
 from lab1.stack import StackArray
 from lab1.operand import Operands
 class Expressions():
-    def __init__(self, string, type):
+    def __init__(self, string, input_type):
         self.string = string
-        self.type = type
+        self.input_type = input_type
         self.valid_types = ['Prefix','Postfix','Infix']
-        if self.type not in self.valid_types:
-            print(f"The type you entered: {type}, is incorrect. Please enter a type from the following: {self.valid_types}")
+        if self.input_type not in self.valid_types:
+            print(f"The type you entered: {input_type}, is incorrect. Please enter a type from the following: {self.valid_types}")
 
     def to_post_fix(self):
-        if self.type == 'Prefix':
+        if self.input_type == 'Prefix':
             return self.pre_to_post()     
-        elif self.type == 'Infix':
-            print("Process does not exist at the moment! Try again another time.")
+        elif self.input_type == 'Infix':
+            return "Process does not exist at the moment! Try again another time."
         else:
-            pass
+            return self.string
         
     def to_pre_fix(self):
-        if self.type == 'Postfix':
-            self.post_to_pre()
-        elif self.type == 'Infix':
-            print("Process does not exist at the moment. Try again another time.")
+        if self.input_type == 'Postfix':
+            return self.post_to_pre()
+        elif self.input_type == 'Infix':
+            return "Process does not exist at the moment. Try again another time."
+        else:
+            return self.string
 
     def to_infix(self):
-        if self.type =='Prefix':
-           self.pre_to_infix()
-        elif self.type == 'Postfix':
-           self.post_to_infix()
+        if self.input_type =='Prefix':
+           return self.pre_to_infix()
+        elif self.input_type == 'Postfix':
+           return self.post_to_infix()
         else:
             return self.string
                
@@ -68,11 +70,10 @@ class Expressions():
                         return "Incorrect Number of Operands"
                 else:
                     stack.push(operand.combine_operands())    
-        stack.display_stack()
         if stack.stack_length()>1:
             return 'Incorrect Number of Operators' 
         else:
-            return stack.return_object()[0]
+            return self.reverse_order(stack.return_object()[0])
 
 
     def pre_to_infix(self):

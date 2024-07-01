@@ -1,0 +1,45 @@
+Testcase 1
+ Prefix: AB+C*
+ Postfix: None
+Testcase 2
+ Prefix: AB*CD/+
+ Postfix: None
+Testcase 3
+ Prefix: ABC*+D/
+ Postfix: None
+Testcase 4
+ Prefix: AB+CD*+
+ Postfix: None
+Testcase 5
+ Prefix: ABC*D/+
+ Postfix: None
+Testcase 6
+ Prefix: ABCD*+/
+ Postfix: None
+Testcase 7
+ Prefix: AB+CD+*
+ Postfix: None
+Testcase 8
+ Prefix: ABCD+*+
+ Postfix: None
+Testcase 9
+ Prefix: ABC+*D/
+ Postfix: None
+Testcase 10
+ Prefix: AB+CDE+*+
+ Postfix: None
+Testcase 11
+ Prefix: A
+ Postfix: None
+Testcase 12
+ Prefix: AB+
+ Postfix: None
+Testcase 13
+ Prefix: ABC+*
+ Postfix: None
+Testcase 14
+ Prefix: AB*+
+ Postfix: None
+Testcase 15
+ Prefix: AB*CD+
+ Postfix: None

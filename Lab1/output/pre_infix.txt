@@ -1,0 +1,45 @@
+Testcase 1
+ Prefix: *+ABC
+ Postfix: ((A+B)*C)
+Testcase 2
+ Prefix: +A*BC
+ Postfix: (A+(B*C))
+Testcase 3
+ Prefix: *-A/BCDE
+ Postfix: Incorrect Number of Operators
+Testcase 4
+ Prefix: *-A/BC*DE
+ Postfix: ((A-(B/C))*(D*E))
+Testcase 5
+ Prefix: +*A/BCD
+ Postfix: ((A*(B/C))+D)
+Testcase 6
+ Prefix: -/A*BCD
+ Postfix: ((A/(B*C))-D)
+Testcase 7
+ Prefix: +/A*BCD
+ Postfix: ((A/(B*C))+D)
+Testcase 8
+ Prefix: *-A/BC/DE
+ Postfix: ((A-(B/C))*(D/E))
+Testcase 9
+ Prefix: +A*B/CD
+ Postfix: (A+(B*(C/D)))
+Testcase 10
+ Prefix: *-A+B/CD
+ Postfix: Incorrect Number of Operands
+Testcase 11
+ Prefix: +A
+ Postfix: Incorrect Number of Operands
+Testcase 12
+ Prefix: +A*BC
+ Postfix: (A+(B*C))
+Testcase 13
+ Prefix: ++ABC
+ Postfix: ((A+B)+C)
+Testcase 14
+ Prefix: **ABC
+ Postfix: ((A*B)*C)
+Testcase 15
+ Prefix: *+A
+ Postfix: Incorrect Number of Operands
