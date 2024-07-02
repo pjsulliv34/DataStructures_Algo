@@ -48,7 +48,7 @@ class Expressions():
             return self.string
 
     # Initialize a list of operators that is used in the methods below.         
-    operators = ['+','-','/','*','$','(',')']
+    operators = ['+','-','/','*','$']
 
     # This Method converts from prefix to post fix
     def pre_to_post(self):
@@ -123,7 +123,6 @@ class Expressions():
                     return "Incorrect Number of Operands"
                 else:
                     stack.push(operand.combine_operands())    
-        stack.display_stack()
         if stack.stack_length()>1:
             return 'Incorrect Number of Operators' 
         else:
@@ -143,7 +142,6 @@ class Expressions():
                     return "Incorrect Number of Operands"
                 else:
                     stack.push(operand.combine_operands())    
-        stack.display_stack()
         if stack.stack_length()>1:
             return 'Incorrect Number of Operators' 
         else:
