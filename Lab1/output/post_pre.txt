@@ -1,45 +1,45 @@
 Testcase 1
- Prefix: AB+C*
- Postfix: *+ABC
+ Postfix: AB+C*
+ Prefix: *+ABC
 Testcase 2
- Prefix: AB*CD/+
- Postfix: +*AB/CD
+ Postfix: AB*CD/+
+ Prefix: +*AB/CD
 Testcase 3
- Prefix: ABC*+D/
- Postfix: /+A*BCD
+ Postfix: ABC*+D/
+ Prefix: /+A*BCD
 Testcase 4
- Prefix: AB+CD*+
- Postfix: ++AB*CD
+ Postfix: AB+CD*+
+ Prefix: ++AB*CD
 Testcase 5
- Prefix: ABC*D/+
- Postfix: +A/*BCD
+ Postfix: ABC*D/+
+ Prefix: +A/*BCD
 Testcase 6
- Prefix: ABCD*+/
- Postfix: /A+B*CD
+ Postfix: ABCD*+/
+ Prefix: /A+B*CD
 Testcase 7
- Prefix: AB+CD+*
- Postfix: *+AB+CD
+ Postfix: AB+CD+*
+ Prefix: *+AB+CD
 Testcase 8
- Prefix: ABCD+*+
- Postfix: +A*B+CD
+ Postfix: ABCD+*+
+ Prefix: +A*B+CD
 Testcase 9
- Prefix: ABC+*D/
- Postfix: /*A+BCD
+ Postfix: ABC+*D/
+ Prefix: /*A+BCD
 Testcase 10
- Prefix: AB+CDE+*+
- Postfix: ++AB*C+DE
+ Postfix: AB+CDE+*+
+ Prefix: ++AB*C+DE
 Testcase 11
- Prefix: A
  Postfix: A
+ Prefix: A
 Testcase 12
- Prefix: AB+
- Postfix: +AB
+ Postfix: AB+
+ Prefix: +AB
 Testcase 13
- Prefix: ABC+*
- Postfix: *A+BC
+ Postfix: ABC+*
+ Prefix: *A+BC
 Testcase 14
- Prefix: AB*+
- Postfix: Incorrect Number of Operands
+ Postfix: AB*+
+ Prefix: Incorrect Number of Operands
 Testcase 15
- Prefix: AB*CD+
- Postfix: Incorrect Number of Operators
+ Postfix: AB*CD+
+ Prefix: Incorrect Number of Operators
