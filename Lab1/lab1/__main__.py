@@ -7,8 +7,8 @@ from lab1.lab1_functions import process_input_file
 arg_parser = argparse.ArgumentParser()
 arg_parser.add_argument("in_file", type=str, help="Input File Pathname")
 arg_parser.add_argument("out_file", type=str, help="Output File Pathname")
-arg_parser.add_argument("input_type", type = str, help = "Input type")
-arg_parser.add_argument("output_type", type = str, help = "Output type")
+arg_parser.add_argument("input_type", type = str, help = "Input type", default= 'Prefix', nargs= '?')
+arg_parser.add_argument("output_type", type = str, help = "Output type", default= 'Postfix', nargs= '?')
 args = arg_parser.parse_args()
 
 
