@@ -1,0 +1,10 @@
+The resource folder contains three testing sheets. The first is the Required Input that was provided for the lab. 
+I processed those inputs and pushed those to Prefix to infix required input and prefix to postfix required input.txt. I then
+ create a list of simple postfix expressions to convert to infix and prefix. These are simple and easy to check if correct. 
+
+The final sheet that I used for testing is the prefix_additional.txt. This folder contains the extremes that I was looking for. 
+The other two provided examples of handling blank space between Operands and operators. We also convert all '^' to '$'. We also 
+test to see if there are Incorrect number of operands or operators. I checked to see how numbers are handled and parentheses. 
+Anything other than an operator that is included in the operator list: ['+','-','/','*','$'] will be seen as a operand. Lower case 
+and upper case do not matter. Numbers are handled as operands. Large amounts of blank space between inputs does not matter. One 
+issue to note is that a space between lines will cause all inputs below that line to be ignored.
