@@ -192,7 +192,7 @@ class Expressions:
     # This Method takes a string and reverses the order of the string.    
     def reverse_order(self, string):
 
-        # If clause to check if the string length equals 0
+        # Base Case of recursive function
         if len(string) == 0:
             return string  
 
