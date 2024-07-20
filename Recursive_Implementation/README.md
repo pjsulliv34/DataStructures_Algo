@@ -1,6 +1,6 @@
-Lab 1
+Lab 2
 Peter Sullivan
-7/2/24
+7/23/24
 
 This project enables users to convert from Postfix to Prefix and Infix, and Prefix to Postfix and Infix using the command line. In order for the package to work make sure you are in the location of this readme document. Open up the cmd line and call on the package using pythons module ability. This module takes in four arguments: Inpath, Outpath, input type and output type. Inpath and Outpath are relative to the location you are running the cmd line from. Here are the valid input and output types: 'Prefix','Postfix','Infix'. The final two arguments are optional and default to:
 
