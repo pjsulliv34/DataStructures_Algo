@@ -32,12 +32,11 @@ def process_input_file(input,output,input_type,output_type):
             try:
                 
                 # Create an expression object using the Expressions Class
-                print(f'line {line}\n')
+                
                 expression_object = Expressions(line,input_type)
                 
                 # If Else clause to check what is the desired output. Desired output will determine which clause to run
                 if output_type == 'Postfix':
-                    print('running to Postfix')
                     
                     # Create desired output string using expression object method
                     output_expression = expression_object.to_post_fix()
@@ -55,7 +54,7 @@ def process_input_file(input,output,input_type,output_type):
             # Except clause to catch any errors that are not planned
             except Exception as e:
                 print(e)
-                Processed_data.append([line,'Unknown Error'])
+                Processed_data.append([line,e])
                      
     # Open up output file in writing mode
     with open(output, 'w') as writer:

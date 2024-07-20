@@ -4,13 +4,13 @@ Peter Sullivan
 
 This project enables users to convert from Postfix to Prefix and Infix, and Prefix to Postfix and Infix using the command line. In order for the package to work make sure you are in the location of this readme document. Open up the cmd line and call on the package using pythons module ability. This module takes in four arguments: Inpath, Outpath, input type and output type. Inpath and Outpath are relative to the location you are running the cmd line from. Here are the valid input and output types: 'Prefix','Postfix','Infix'. The final two arguments are optional and default to:
 
-•	Input type : Prefix
-•	Output type: Postfix
+•   Input type : Prefix
+•   Output type: Postfix
 
 For this lab we are required to convert from prefix to postfix. My enhancement to enabling additional conversion as mentioned above. To test case from Prefix to Postfix this is an example cmd line request:
 
-python -m lab1 resources/Required_Input.txt output/output.txt Prefix Postfix
-python -m lab1 resources/Required_Input.txt output/output.txt 
+python -m lab2 resources/Required_Input.txt output/output.txt Prefix Postfix
+python -m lab2 resources/Required_Input.txt output/output.txt 
 
 The default is from prefix to postfix, so there is no need to enter the last two arguments if we are just converting from Prefix to Postfix.
 
@@ -18,11 +18,9 @@ Feel free to swap the paths as desired, and make sure to choose the correct inpu
 
 Next, I will walk through each step of the program in the order that it runs.
 
-
 __init__.py
 
 This runs every time the package is imported. This will allow users to use the function process input file function if they desire to use the capabilities of this project.
-
 
 __main__.py
 
@@ -32,52 +30,34 @@ I then initialize an Argument parser using the argparse package. I then add four
 
 Finally, I call on the process_input_file function to process our inputs that the user has inputted via the cmd line.
 
-
-lab1_functions.py
+lab2_functions.py
 
 I first imported the Expression Class from expression script. I then create a function called process input file that takes in four arguments, input, output, input type and output type. I then initialize an empty list called processed data. Then using the input file, I initiate a variable called reader using pythons open method. I open the file using the open method and name the variable reader.
 
 I then use a while loop that is set to true. This while loop will only break when something is false or the break clause is called. I then read in the first line using the readline method and the strip method. The strip method removes black space from the right and left of the line. I then use the replace method to remove any blanks spaces inside the input as well changing carrots to the $ as expected. I then use an if clause to check if the line is a blank string. If so the while loop breaks. If not, we then head to the try except block.
 
-In the try block I first create a Expression object using the expressions class which takes in the input from the readline and the input type. I then set up a if clause to check the output type. This tells us which method to call on the expression object. So if we are using a prefix to postfix object. Then the method called would be to post fix. This returns the postfix string. I then append the processed data with a list containing the input string and the output string. If the try fails, we then append the processed data list with the input string and an error as unknown, as this error was not planned for. We loop through each line in the input file.
+In the try block I first create an Expression object using the expressions class which takes in the input from the readline and the input type. I then set up a if clause to check the output type. This tells us which method to call on the expression object. So if we are using a prefix to postfix object. Then the method called would be to post fix. This returns the postfix string. I then append the processed data with a list containing the input string and the output string. If the try fails, we then append the processed data list with the input string with the error using the Exception object for that particular and unknown error.  We loop through each line in the input file.
 
 After the while loop I then use the open function to open the output file in writer mode and initiate the writer variable. I then initiate an index as the integer 1. Next, I loop through each item in the processed data list. For each item in the list, I print out the test case number (index), the input type as well as the input string, the output type and finally the output string. I then increment the index by 1. We loop through each item in the processed data list then close the file.
-
 
 expressions.py
 
 This class creates an expression object that does most of the work required when converted from one expression to the next.
 
-I first imported the StackArray class from stack.py and the Operands class from the operand.py scripts. I then initialized the instance variables string and input type. I also created a quick check on the input type by initiating a list called valid_types. If the type is not in valid types, then the program will spit out an error, asking for correct types. 
+I first import the Operands class from the operand.py scripts. I then initialized the instance variables string and input type. I also created a quick check on the input type by initiating a list called valid_types. If the type is not in valid types, then the program will spit out an error, asking for correct types. 
 
 Next I created a method called to_post_fix which checks to see the input type. If prefix, we call the pre to post function. If infix, I print out an error. The program does not currently support infix to postfix. This will be a future enhancement. The final clause returns the string since converted from post fix to postfix requires no modification.
 
 The to prefix and to infix methods work in the same way as to postfix.
 
-Next, I initiate an list of operators.
+Next, I initiate a list of operators.
 
-The next method I created is the pre to post method. This method converts from prefix to postfix. I will only need to go through one of the four conversion methods. They are all very similar, the only difference is that some require looping through the inverse or inversing the string on return.
+The next method I created is the pre to post method. This method converts from prefix to postfix recursively by recursively processing each character in the prefix string and modifying the postfix list/string on each call. I will only need to go through one of the four conversion methods. They are all very similar, the only difference is that some require looping through the inverse or inversing the string on return.
 
-For pre to postfix, I first initialize and empty stack object using the stackarray class. I then loop through each character in the inputted string but in reverse using the reverse order method. I then check if the character is in the operators list, if not, I push the character onto the stack. If the character is in the operators list, I then pop the two top items. I then create a operand object using the Operands class, using the two popped items, the operator, and a string that tells that operand how to handle the combine operation. I then have a if clause to check if the combine operands method returns none type. If it does, this means that we have the incorrect number of operands. That message will be returned as the final output in our output file.
-If not, then we push the result of calling the method combine_operands(). Before returning the string that has been converted, I implement a if clause to check to see if the stack length is >1. This means that we did not have enough operators in the input string. This would also be returned to the output file if that is the case. Otherwise we pop the stack which should contain the converted string.
+For pre to postfix, the method takes the self keyword, and two other keyword arguments postfix, and index respectively. If postfix and index are not inputted, they will be defaulted to None for postfix and 0 for index.
+Next, I put an if clause in to check if postfix is equal to None, if so, then that means we are in the first call of the method. If it is the first call to the method, then we initialize an empty list called postfix. I then use an if clause to check if the index is >= length of the string as the base case of the recursive function. This means we have processed every character, and we can now return the result. Within the base case, I put a final check to check if the postfix list has more than 1 element. If that is the case, then will return the error. If that is not the case, then we can return the 1 element in the postfix list, using the pop list function. Next is the meat of the recursive function. We first grab the current element in the reversed string using the inputted index. To reverse the string, I use the reverse order method, which I will explain later on. If that element/character is not in the class variable operators, then we can append the postfix list with that character and increment the index by 1. We then call the pre_to_postfix function again with our current postfix list and index. If the character is in the class variable operators, we then move to the else clause. With in the else clause, I first use an if clause to check if the length of the postfix list is less than 2. If so, I return the expected error. If not, I then pop the first two elements from the postfix list. I then create an operand object using the Operands class, and the two items from the postfix list, the current character, and the expected keyword for the operands class. For this method, 'Pre_Post' is expected. For more information on this, see the operand.py explanation below. I then append the postfix list with the result of the operand.combine_operands method. I then increment the index by 1.  Finally, I call the pre_to_post method again with the current postfix list and index. This process will continue until the base case clause is True.
 
-The final method is the reverse_order method which takes a string. This method first initializes an empty stack using the stack array class. Then loops through each character string and pushes onto the stack. I then initialize an empty string. I then use a while loop to check if the stack is empty, if not we pop the stack and add that to the empty string. Finally, we return the reversed string.
-
-
-stack.py
-
-For this script, I created a class called StackArray. This class was called multiple times in the expressions.py script. This class is meant to mimic a stack object using pythons built in list. I first initiate the class instance variables. For this one, we take no input, and it creates an empty list called stack.
-
-I then created multiple methods to mimic a stacks methods. The first method is the empty method. This method checks to see if the length of the list ==0 using the len function. If so return True, otherwise return false.
-
-The next method is the peek method. This method first checks to see if the stack is empty. We can't peek an element on an empty stack or list. If the stack is empty, we print the stack is empty. Otherwise, I return the value of the last element in the list (top of the stack) using the indices and the len function.
-
-The next method is the pop method. We first check to see that the stack is empty, if not i create a variable called item which references the last item in the list (top of stack). I then use indices to slice the stack and exclude the last item from the stack. I then return the final item that was popped off the stack.
-
-The next method is the stack length method. This method uses the len function to return the length.
-
-The final method is the push method. This method takes in an item and uses pythons built in append function to push the item to the top of the stack or the end of list.
-
+The final method is the reverse_order method which takes that self keyword and a string to recursively process and return the reversed order of the string. I use an if clause as my base case to check if the string length is 0, if so, return the string. If the base case is not satisfied, I then return the final element in the string concatenated with the call of the reverse_order method, with the current string with out its final element. This process will continue until the base case.
 
 opperand.py
 
@@ -90,6 +70,7 @@ The next method is the combine post and prefix method. This method first checks 
 The next two combine methods are very similar to the method above, the only difference is the order that the operands are combined, and the to infix methods add in '('  ')' to the ends of the combined operators and operands.
 
 The final method is the check for none, this just checks to see if the operands or operators are none, if so return true, otherwise false.
+
 
 
 
