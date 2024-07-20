@@ -1,4 +1,4 @@
-from Lab2.stack import StackArray
+
 from Lab2.operand import Operands
 class Expressions:
     """
@@ -7,7 +7,7 @@ class Expressions:
     as a string. Then we have three main methods, to postfix, to prefix and to infix. These methods, use the input type to verify the process 
     required in order to convert to the desired expression. Once the process has been confirmed, then the method calls on one of the four 
     methods to convert from the input type to the desired output type. The last method in the class is the reverse order method. This method 
-    takes in a string and reverses the order of the string using the imported stack method.
+    takes in a string and reverses the order of the string recursively processing each item in the string.
     """
 
     # Initialize class instance variables
@@ -52,29 +52,57 @@ class Expressions:
 
     # This Method converts from prefix to post fix
     def pre_to_post(self, postfix = None, index = 0):
+
+        # Check to see if a postfix list has been inputed into the function
         if postfix == None:
+
+            # Initialize Empty list
             postfix = []
+
+        # Base Case of recursive function. 
         if index >= len(self.string):
-            print(f'final postfix {postfix}')
+
+            # If clause to check if length of postfix list is greater than 1, if so, return error, else return final element in list
             if len(postfix) >1:
                 return 'Incorrect Number of Operators'
             else:
                 final_item = postfix.pop()
                 return final_item
+            
+        # Grab current element in recursive call based on inputed index
+        # List is reverse before traversing to grab element    
         char = self.reverse_order(self.string)[index]
+
+        # Check to see if char in the class variable operators
         if char not in Expressions.operators:
+
+            # If not add char to postfix list and increment index
             postfix.append(char)
             index +=1
+
+            # Recursive call to pre_to_post function
             return self.pre_to_post(postfix, index)
+        
+        # Else clause assumes character not in class variable operators
         else:
+
+            # Check to see if the postfix list is less than 2 elements, if so, return error
             if len(postfix) <2:
                 return "Incorrect Number of Operands"
             else:
+
+                # Use pop function to grab the first two elements in postfix list
                 item1 = postfix.pop()
                 item2 = postfix.pop()
+
+                # Create an operand object using the operand class
                 operand = Operands(item1,item2,char,'Pre_Post')
+
+                # Using operand method, append list with new opperand. Increment index by 1.
                 postfix.append(operand.combine_operands())
                 index +=1
+
+                # Recursive call to pre_to_post function
                 return self.pre_to_post(postfix, index)
 
      
@@ -88,6 +116,8 @@ class Expressions:
                 return 'Incorrect Number of Operators'
             else:
                 final_item = prefix.pop()
+
+                # reverse the string before returning the final prefix string.
                 return self.reverse_order(final_item)
         char = self.string[index]
         if char not in Expressions.operators:
@@ -111,7 +141,6 @@ class Expressions:
         if infix == None:
             infix = []
         if index >= len(self.string):
-            print(f'final postfix {infix}')
             if len(infix) >1:
                 return 'Incorrect Number of Operators'
             else:
@@ -139,7 +168,6 @@ class Expressions:
         if infix == None:
             infix = []
         if index >= len(self.string):
-            print(f'final postfix {infix}')
             if len(infix) >1:
                 return 'Incorrect Number of Operators'
             else:
@@ -160,37 +188,17 @@ class Expressions:
                 infix.append(operand.combine_operands())
                 index +=1
                 return self.post_to_infix(infix, index)
-        
+            
+    # This Method takes a string and reverses the order of the string.    
     def reverse_order(self, string):
+
+        # Base Case of recursive function
         if len(string) == 0:
-            return string   
+            return string  
+
+        # Recursive call grabbing last element and string to the last element inclusive 
         return string[-1] + self.reverse_order(string[:-1])
 
-    # # This Method takes a string and reverses the order
-    # def reverse_order(self,string):
-
-    #     # Initialize a Stack
-    #     stack = StackArray()
-        
-    #     # Loop through each character in string
-    #     for char in string:
-    #         # Push character onto stack
-    #         stack.push(char)
-
-    #     # Initialize an empty string
-    #     reverse_string = ''
-        
-    #     # while loop to verify that the stack is not empty
-    #     while stack.empty() == False:
-
-    #         # set char variable to reference top of item on stack
-    #         char = stack.pop()
-            
-    #         # Append string with characgter from stack
-    #         reverse_string = reverse_string+char  
-
-    #     # Return reversed string
-    #     return reverse_string
 
        
 
