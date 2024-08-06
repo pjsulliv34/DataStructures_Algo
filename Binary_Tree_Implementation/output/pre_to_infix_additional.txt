@@ -1,0 +1,36 @@
+Testcase 1
+ Prefix: 592929
+ Infix: Incorrect Number of Operators
+Testcase 2
+ Prefix: +5a
+ Infix: (5+a)
+Testcase 3
+ Prefix: +Aa
+ Infix: (A+a)
+Testcase 4
+ Prefix: +A
+ Infix: Incorrect Number of Operands
+Testcase 5
+ Prefix: *+A
+ Infix: Incorrect Number of Operands
+Testcase 6
+ Prefix: +a6
+ Infix: (a+6)
+Testcase 7
+ Prefix: )a6
+ Infix: Incorrect Number of Operators
+Testcase 8
+ Prefix: ABCD+*+
+ Infix: Incorrect Number of Operands
+Testcase 9
+ Prefix: *$A$BC+C-BA
+ Infix: ((A$(B$C))*(C+(B-A)))
+Testcase 10
+ Prefix: ++568
+ Infix: ((5+6)+8)
+Testcase 11
+ Prefix: aA*a/
+ Infix: Incorrect Number of Operands
+Testcase 12
+ Prefix: -+aAa
+ Infix: ((a+A)-a)
