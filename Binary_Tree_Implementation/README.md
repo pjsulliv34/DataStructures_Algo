@@ -1,22 +1,20 @@
-Lab 2
+Lab 3
 Peter Sullivan
-7/23/24
+8/6/2024
 
-This project enables users to convert from Postfix to Prefix and Infix, and Prefix to Postfix and Infix using the command line. In order for the package to work make sure you are in the location of this readme document. Open up the cmd line and call on the package using pythons module ability. This module takes in four arguments: Inpath, Outpath, input type and output type. Inpath and Outpath are relative to the location you are running the cmd line from. Here are the valid input and output types: 'Prefix','Postfix','Infix'. The final two arguments are optional and default to:
+This project enables users to perform huffman encoding using an inbuilt class called Huffman. By inputting 4 inputs freq_table, encoded, clear_text and an outpath, the program will read in the three input files, freq, encoded data, and clear text data. The program will then build a huffman tree using the frequency data. Utilizing that huffman tree, the program will then create a huffman code by traversing the tree and assigning 1's and 0's. Next the program will use that huffman code to decode the encoded data and encode the clear text data. Writing both to the output file.
 
-•   Input type : Prefix
-•   Output type: Postfix
+ If users want to use this package from the command line. They will need to input four different arguments in the command line. 
 
-For this lab we are required to convert from prefix to postfix. My enhancement to enabling additional conversion as mentioned above. To test case from Prefix to Postfix this is an example cmd line request:
+•   Freq Table Path
+•   Encoded Text Path
+•   Clear Text Path
+•   Output Path
 
-python -m lab2 resources/Required_Input.txt output/output.txt Prefix Postfix
-python -m lab2 resources/Required_Input.txt output/output.txt 
+Here are the examples Calls to the program:
 
-The default is from prefix to postfix, so there is no need to enter the last two arguments if we are just converting from Prefix to Postfix.
-
-Feel free to swap the paths as desired, and make sure to choose the correct input and output types when running.
-
-Next, I will walk through each step of the program in the order that it runs.
+python -m Lab3 resources\FreqTable.txt resources\Encoded.txt resources\ClearText.txt output\Output.txt
+python -m Lab3 resources\FreqTable.txt resources\Encoded.txt resources\ClearText.txt output\Output2.txt 
 
 __init__.py
 
@@ -24,55 +22,50 @@ This runs every time the package is imported. This will allow users to use the f
 
 __main__.py
 
-When we run the cmd line as shown above. This is the first file that the module will run. I first import the Path method from pathlib, argpase and the process input file function from the lab1_functions script.
+When we run the cmd line as shown above. This is the first file that the module will run. I first import the Path method from pathlib, argparse and the process input file function from the lab1_functions script.
 
-I then initialize an Argument parser using the argparse package. I then add four arguments that will enable the user to input from the command line in order to run this project. The input type and output type are optional and have defaults if they are not added to the cmd line call. I then use the parse_args method to set up an args object. The two final arguments are optional. They will default to input type prefix and output type postfix. Finally, I create the four variables using the args object, inpath, outpath, input type and outputy type. I also specify that infile and outfile are paths using the path method from the pathlib class.
+I then initialize an Argument parser using the argparse package. I then add four arguments that will enable the user to input from the command line in order to run this project. 
 
-Finally, I call on the process_input_file function to process our inputs that the user has inputted via the cmd line.
+The freq_table specifies that location of the frequency table provided in a .txt file. The encoded and clear text are processed the same way. Finally, the out_path is used to specify the location of the text file. For all four arguments, I use the Path Method.
 
-lab2_functions.py
+Finally, I call on the process_main function to process our inputs that the user has inputted via the cmd line.
 
-I first imported the Expression Class from expression script. I then create a function called process input file that takes in four arguments, input, output, input type and output type. I then initialize an empty list called processed data. Then using the input file, I initiate a variable called reader using pythons open method. I open the file using the open method and name the variable reader.
+lab3_functions.py
 
-I then use a while loop that is set to true. This while loop will only break when something is false or the break clause is called. I then read in the first line using the readline method and the strip method. The strip method removes black space from the right and left of the line. I then use the replace method to remove any blanks spaces inside the input as well changing carrots to the $ as expected. I then use an if clause to check if the line is a blank string. If so the while loop breaks. If not, we then head to the try except block.
+This script first imports the Huffman class from the huffman.py script.
 
-In the try block I first create an Expression object using the expressions class which takes in the input from the readline and the input type. I then set up a if clause to check the output type. This tells us which method to call on the expression object. So if we are using a prefix to postfix object. Then the method called would be to post fix. This returns the postfix string. I then append the processed data with a list containing the input string and the output string. If the try fails, we then append the processed data list with the input string with the error using the Exception object for that particular and unknown error.  We loop through each line in the input file.
+I then created a method called process main which takes in four inputs specified from the cmd line. I then read in the three tables using the process file’s function. I then initialize an empty list. Using the frequency table List, I loop through each element and create a treenode using the Huffman class.
 
-After the while loop I then use the open function to open the output file in writer mode and initiate the writer variable. I then initiate an index as the integer 1. Next, I loop through each item in the processed data list. For each item in the list, I print out the test case number (index), the input type as well as the input string, the output type and finally the output string. I then increment the index by 1. We loop through each item in the processed data list then close the file.
+Next, I initialize an empty Tree object. I then use that empty tree objects method called sort Priority to sort the list of tree nodes based on priority desired for this assignment. Next, I build a huffman tree using the huffman method and inputting the sorted tree node list. I then create an object that represents the Preorder Traversal of the Huffman tree. This is a list of nodes. I then grab the huffman codes using the get huffman codes method. 
 
-expressions.py
+Next, I open the output file as a .txt. I first loop through the pre order traversal list and write each item to the output file. I then loop through each line in the encoded files and decode the string using the decode huffman method. I then write the message and decode the output.
 
-This class creates an expression object that does most of the work required when converted from one expression to the next.
+I put in a try except, to catch any errors on each line of the encoding. This will print the error, not write the error to the output file. This can be modified to write to the file if desired. I then perform the same loop for lines in the clear text, but instead of using the decode huffman, I use the encode huffman method.
 
-I first import the Operands class from the operand.py scripts. I then initialized the instance variables string and input type. I also created a quick check on the input type by initiating a list called valid_types. If the type is not in valid types, then the program will spit out an error, asking for correct types. 
+The next function is the process files function. This takes in an input and a type. I first initialize an empty list. I then open the input file in reader mode. I then loop through until the while loop breaks. I read through each line item stripping out blank spaces. If the line is blank, the program will then break the loop.
 
-Next I created a method called to_post_fix which checks to see the input type. If prefix, we call the pre to post function. If infix, I print out an error. The program does not currently support infix to postfix. This will be a future enhancement. The final clause returns the string since converted from post fix to postfix requires no modification.
+I then use an if clause to check which type of file we are processing. If its a freq type, we then need to split and append the items in a nested list. Otherwise we can append the line item a string to the processed list. I use try except clauses to check for errors while reading in each file.
 
-The to prefix and to infix methods work in the same way as to postfix.
+huffman.py
 
-Next, I initiate a list of operators.
+This program is used to create the class Called Huffman. This class can be used to create tree nodes, or to perform huffman encoding. The class first creates 4 class instance variables. We have an additional instance variable called char that is needed for huffman encoding.
 
-The next method I created is the pre to post method. This method converts from prefix to postfix recursively by recursively processing each character in the prefix string and modifying the postfix list/string on each call. I will only need to go through one of the four conversion methods. They are all very similar, the only difference is that some require looping through the inverse or inversing the string on return.
+I then create a method called build huffman tree. This method takes in a sorted list of nodes. For best accuracy, it is recommended that the nodes are presorted before pushing to this method. I then use a while loop to check if the length of the sorted nodes list is greater than 1. If so, we pop the first two items in the list. I then combine the values of each node and the characters of each node. I then create a parent node using the Huffman class and inputting the new val, char, and the left and right nodes as children. I then append the new single node back on the list. I then sort the sorted nodes list again before the next iteration. When the sorted list is less then 2, the loop breaks and returns the tree node.
 
-For pre to postfix, the method takes the self keyword, and two other keyword arguments postfix, and index respectively. If postfix and index are not inputted, they will be defaulted to None for postfix and 0 for index.
-Next, I put an if clause in to check if postfix is equal to None, if so, then that means we are in the first call of the method. If it is the first call to the method, then we initialize an empty list called postfix. I then use an if clause to check if the index is >= length of the string as the base case of the recursive function. This means we have processed every character, and we can now return the result. Within the base case, I put a final check to check if the postfix list has more than 1 element. If that is the case, then will return the error. If that is not the case, then we can return the 1 element in the postfix list, using the pop list function. Next is the meat of the recursive function. We first grab the current element in the reversed string using the inputted index. To reverse the string, I use the reverse order method, which I will explain later on. If that element/character is not in the class variable operators, then we can append the postfix list with that character and increment the index by 1. We then call the pre_to_postfix function again with our current postfix list and index. If the character is in the class variable operators, we then move to the else clause. With in the else clause, I first use an if clause to check if the length of the postfix list is less than 2. If so, I return the expected error. If not, I then pop the first two elements from the postfix list. I then create an operand object using the Operands class, and the two items from the postfix list, the current character, and the expected keyword for the operands class. For this method, 'Pre_Post' is expected. For more information on this, see the operand.py explanation below. I then append the postfix list with the result of the operand.combine_operands method. I then increment the index by 1.  Finally, I call the pre_to_post method again with the current postfix list and index. This process will continue until the base case clause is True.
+I then create another method called get huffman codes. This method first uses an if clause to check if we are at a leaf node. A leaf node will have no children on the left or right side. If so, then we append the huffman list. If that is not the case, we then use a recursive call to call the get huffman codes method inputting the left or right node depending on which node is not none, the current huffman list and the current prefix. As left children get priority, we always check the left if clause before the right if clause. We then return the nested list containing the huffman codes.
 
-The final method is the reverse_order method which takes that self keyword and a string to recursively process and return the reversed order of the string. I use an if clause as my base case to check if the string length is 0, if so, return the string. If the base case is not satisfied, I then return the final element in the string concatenated with the call of the reverse_order method, with the current string with out its final element. This process will continue until the base case.
+The method I create is called sort priority. This is one of the most important functions. If this is working incorrectly, the program will not decode correctly. I first initialize an empty list called stack and a list containing the alphabet. I then use a while loop to check if the inputted list is empty.
+I then pop the item from the list. Initialize an empty stack and two indexes at 0. 
+I then use two for loops. The first loops through the alphabet list and increments the current index until we reach the index of the alphabet. The next loop first checks if the stack is empty, and if not then grabs the location of the alphabet for the item on top of the stack.
 
-opperand.py
+I then use a while loop to append the temp stack with the current stack top, if the current item is greater than the stack value, or if the values match, and current char length is greater than the current char length or if both the char lengths and the values match, we check to see if the current index in the alphabet is greater than the stack index in the alphabet.
 
-The expressions.py script also called on the operands class. This script creates the class Operands. This class creates an Operand object using two operands, an operator, and the input type. The class takes these inputs and combines them based on the input type.
+This then appends the stack with the current item. I then empty the temp stack back into the main stack, before iterating through the next node. This then returns the node list in the desired priority as requested in the assignment.
 
-I first initialize the class instance variables. I then created a method called combine operands. This method uses the type to call on the methods below. For example, if the type is Pre_Post ( which means converting from Prefix to Postfix) we then return the result from the combine_post and Prefix method.
+I then created a method called encode huffman. This method takes in a string and a huffman code. We first initialize an empty string called final. I then loop through each character in the string. I then loop through each item in the huffman code comparing the lowercase versions of both. If we get a match, we then add the encoded binary to the final output. We then return the output after going through each character.
 
-The next method is the combine post and prefix method. This method first checks to see if the check for None method is False, If so, we then create a string called combined which is the operators and operands combined in the order that prefix to post fix requires. We then return that string. If there is none type, we return None-Type, which is used by the expressions class to identify an error.
+The next method is the decode huffman method. This method reads in a binary string and the huffman code. We initialize two empty strings, final and tempchar. I then loop through each bit in the binary string. I then add that bit to the temp char string. I then loop through the codes to check if we have a binary match. If not, I then add another bit to the temp string and keep adding until we get a match. If we get a match, temp is cleared and we keep processing the bits until the code is processed. We return the decoded string.
 
-The next two combine methods are very similar to the method above, the only difference is the order that the operands are combined, and the to infix methods add in '('  ')' to the ends of the combined operators and operands.
-
-The final method is the check for none, this just checks to see if the operands or operators are none, if so return true, otherwise false.
-
-
-
-
+The final method is the Preorder Traversal method. This method takes in a tree node object. This method first checks to see if the output is none, if so, we initialize an empty list. I then create a base case to check if the node is Node None. If that’s the case we return the output list. If not, we then append the output list with the node value and corresponding characters. I then recursively call the function again with the left and the right children, and passing in the output list. Since this is pre order traversal, we call the left child first before calling the right child.
 
 

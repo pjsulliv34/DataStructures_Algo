@@ -8,20 +8,18 @@ arg_parser = argparse.ArgumentParser()
 arg_parser.add_argument("freq_table", type=str, help="Huffman Frequency file")
 arg_parser.add_argument("encoded", type=str, help="Encoded string")
 arg_parser.add_argument("clear_text", type = str, help = "Clear text to be encoded")
-arg_parser.add_argument("test_case",type = str, help = "Helps name the files")
 arg_parser.add_argument('out_path',type = str, help = "outpath of filename")
-
 args = arg_parser.parse_args()
 
 
-freq_type = Path(args.freq_table)
+freq_table = Path(args.freq_table)
 encoded = Path(args.encoded)
 clear_text = Path(args.clear_text)
-test_case = args.test_case
 out_path = Path(args.out_path)
 
 
 
-# Call On the main file from lab1_functions that proccesses the input file and prints to desired output
-process_main(freq_type,encoded,clear_text,out_path,test_case)
+
+# Call On the main function from lab1_functions that proccesses the input file and prints to desired output to a single .txt
+process_main(freq_table,encoded,clear_text,out_path)
 
