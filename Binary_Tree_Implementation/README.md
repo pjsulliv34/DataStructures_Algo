@@ -79,4 +79,6 @@ The next method is the decode huffman method. This method reads in a binary stri
 
 The final method is the Preorder Traversal method. This method takes in a tree node object. This method first checks to see if the output is none, if so, we initialize an empty list. I then create a base case to check if the node is Node None. If that’s the case we return the output list. If not, we then append the output list with the node value and corresponding characters. I then recursively call the function again with the left and the right children, and passing in the output list. Since this is pre order traversal, we call the left child first before calling the right child.
 
+I created two other methods, post and in order traversal. These are the same as preorder but they append the list at a different time.
+
 
