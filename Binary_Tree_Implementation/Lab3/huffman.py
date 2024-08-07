@@ -162,6 +162,50 @@ class Huffman:
         self.preOrderTraversal(node.right, output)
 
         return output
+    
+    # Method to loop through the Tree object using PreOrder Traversal
+    def post_OrderTraversal(self,node, output = None):
+
+        # Checks to see if output is none, and intializes empty list
+        if output is None:
+            output = []
+
+        # Base case to end recursive call
+        if node is None:
+            return output
+
+        # Recursive call on left node, passing in output list
+        self.post_OrderTraversal(node.left, output)
+
+        # Recursive call on right node, passing in output list
+        self.post_OrderTraversal(node.right, output)
+
+        # append output list with node value and characters
+        output.append([node.value,node.char])
+
+        return output
+    
+    # Method to loop through the Tree object using PreOrder Traversal
+    def in_OrderTraversal(self,node, output = None):
+
+        # Checks to see if output is none, and intializes empty list
+        if output is None:
+            output = []
+
+        # Base case to end recursive call
+        if node is None:
+            return output
+
+        # Recursive call on left node, passing in output list
+        self.in_OrderTraversal(node.left, output)
+
+        # append output list with node value and characters
+        output.append([node.value,node.char])
+
+        # Recursive call on right node, passing in output list
+        self.in_OrderTraversal(node.right, output)
+
+        return output
 
         
         
