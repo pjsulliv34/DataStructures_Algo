@@ -3,7 +3,7 @@ from Lab3.huffman import Huffman
 
 # This method will process frequency table, encoded data, and clear text data.
 # After processing the data, the processed data will be writen to the specified outpath.
-def process_main(freq_type,encoded,clear_text,outpath):
+def process_main(freq_type,encoded,clear_text,outpath,traversal_type):
 
     # Read in Data
     freq_table = process_files(freq_type,'freq')
@@ -27,7 +27,15 @@ def process_main(freq_type,encoded,clear_text,outpath):
     huffman_tree = huffman_ob.build_Huffman_tree(reverse_sorted)
   
     # Create a list object that represents the pre order traversal of the huffman tree
-    pre_order_traversal = huffman_ob.preOrderTraversal(huffman_tree)
+    # Additional traversal types are included
+    if traversal_type == 'Pre':
+        order_traversal = huffman_ob.preOrderTraversal(huffman_tree)
+    elif traversal_type == 'Post':
+        order_traversal = huffman_ob.post_OrderTraversal(huffman_tree)
+    elif traversal_type == 'In':
+        order_traversal =huffman_ob.in_OrderTraversal(huffman_tree)
+    else:
+        print('Unknown Traversal Type')
   
     # Grab the huffman codes from Huffman tree
     huffman_code = huffman_ob.get_huffman_codes(huffman_tree,huffman_list=[])
@@ -35,10 +43,10 @@ def process_main(freq_type,encoded,clear_text,outpath):
     # Open the Outpath file in writer mode
     with open(f'{outpath}','w') as writer:
 
-        writer.write('PreOrder Traversal of Huffman Tree\n')
+        writer.write(f'{traversal_type}-Order Traversal of Huffman Tree\n')
         
         # Loop through each line in the Pre Order Traversal of the Huffman tree
-        for line in pre_order_traversal:
+        for line in order_traversal:
             writer.write(f'{line}\n')
 
 

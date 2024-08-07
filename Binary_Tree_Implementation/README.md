@@ -2,7 +2,9 @@ Lab 3
 Peter Sullivan
 8/6/2024
 
-This project enables users to perform huffman encoding using an inbuilt class called Huffman. By inputting 4 inputs freq_table, encoded, clear_text and an outpath, the program will read in the three input files, freq, encoded data, and clear text data. The program will then build a huffman tree using the frequency data. Utilizing that huffman tree, the program will then create a huffman code by traversing the tree and assigning 1's and 0's. Next the program will use that huffman code to decode the encoded data and encode the clear text data. Writing both to the output file.
+This project enables users to perform huffman encoding using an inbuilt class called Huffman. By inputting 4 inputs freq_table, encoded, clear_text and an outpath, the program will read in the three input files, freq, encoded data, and clear text data. The fifth argument is defaulted to pre order traversal, but can be inputed if the user wants to print a different traversal type. The program will then build a huffman tree using the frequency data. Utilizing that huffman tree, the program will then create a huffman code by traversing the tree and assigning 1's and 0's. Next the program will use that huffman code to decode the encoded data and encode the clear text data. Writing both to the output file.
+
+For my enhancement, I added in two additional functions post order traversal and in order traversal. These are methods that can be used when importing the package. I also added in added in an additional args argument that takes in the traversal type. The argument is defaulted to prefix and is not neccessary to add, but if added, the user can specify the traversal type desired. Post, Pre and In. The text in the output file will also change based on the traversal type specified.
 
  If users want to use this package from the command line. They will need to input four different arguments in the command line. 
 
@@ -10,11 +12,18 @@ This project enables users to perform huffman encoding using an inbuilt class ca
 •   Encoded Text Path
 •   Clear Text Path
 •   Output Path
+•   Traveral Type
 
 Here are the examples Calls to the program:
 
 python -m Lab3 resources\FreqTable.txt resources\Encoded.txt resources\ClearText.txt output\Output.txt
 python -m Lab3 resources\FreqTable.txt resources\Encoded.txt resources\ClearText.txt output\Output2.txt 
+python -m Lab3 resources\FreqTable.txt resources\Encoded.txt resources\ClearText.txt output\Output2.txt Post
+python -m Lab3 resources\FreqTable.txt resources\Encoded.txt resources\ClearText.txt output\Output2.txt Pre
+python -m Lab3 resources\FreqTable.txt resources\Encoded.txt resources\ClearText.txt output\Output2.txt In
+
+Traversal Type will always default to Pre, and is not necessary as an input. 
+
 
 __init__.py
 
@@ -26,7 +35,7 @@ When we run the cmd line as shown above. This is the first file that the module 
 
 I then initialize an Argument parser using the argparse package. I then add four arguments that will enable the user to input from the command line in order to run this project. 
 
-The freq_table specifies that location of the frequency table provided in a .txt file. The encoded and clear text are processed the same way. Finally, the out_path is used to specify the location of the text file. For all four arguments, I use the Path Method.
+The freq_table specifies that location of the frequency table provided in a .txt file. The encoded and clear text are processed the same way. The out_path is used to specify the location of the text file. For all four arguments, I use the Path Method. I then bring in the Traversal type as an argument, with the default of Pre.
 
 Finally, I call on the process_main function to process our inputs that the user has inputted via the cmd line.
 
@@ -36,9 +45,11 @@ This script first imports the Huffman class from the huffman.py script.
 
 I then created a method called process main which takes in four inputs specified from the cmd line. I then read in the three tables using the process file’s function. I then initialize an empty list. Using the frequency table List, I loop through each element and create a treenode using the Huffman class.
 
-Next, I initialize an empty Tree object. I then use that empty tree objects method called sort Priority to sort the list of tree nodes based on priority desired for this assignment. Next, I build a huffman tree using the huffman method and inputting the sorted tree node list. I then create an object that represents the Preorder Traversal of the Huffman tree. This is a list of nodes. I then grab the huffman codes using the get huffman codes method. 
+Next, I initialize an empty Tree object. I then use that empty tree objects method called sort Priority to sort the list of tree nodes based on priority desired for this assignment. Next, I build a huffman tree using the huffman method and inputting the sorted tree node list. I then create an object that represents the Preorder Traversal of the Huffman tree. I use an if clause to check the traversal type. The function is defaulted to Pre, but it will run the other types if chosen. If a type is chosen that is not expected we will print an error.
 
-Next, I open the output file as a .txt. I first loop through the pre order traversal list and write each item to the output file. I then loop through each line in the encoded files and decode the string using the decode huffman method. I then write the message and decode the output.
+This is a list of nodes. I then grab the huffman codes using the get huffman codes method. 
+
+Next, I open the output file as a .txt. I thenn write the traversal type and then I loop through the order traversal list and write each item to the output file. I then loop through each line in the encoded files and decode the string using the decode huffman method. I then write the message and decode the output.
 
 I put in a try except, to catch any errors on each line of the encoding. This will print the error, not write the error to the output file. This can be modified to write to the file if desired. I then perform the same loop for lines in the clear text, but instead of using the decode huffman, I use the encode huffman method.
 
